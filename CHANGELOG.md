@@ -1,5 +1,68 @@
 # asciinema changelog
 
+## 3.0.0 (wip)
+
+* Full rewrite in Rust
+* rec: `--append` can be used with `--raw` now
+* rec: use of `--append` and `--overwrite` together returns error now
+* rec: fixed saving of custom rec command in asciicast header
+* Improved error message when non-UTF-8 locale is detected
+
+## 2.4.0 (2023-10-23)
+
+* When recording without file arg we now ask whether to save, upload or discard the recording (#576)
+* Added capture of terminal resize events (#565)
+* Fixed blocking write error when PTY master is not ready (#569) (thanks @Low-power!)
+* Fixed "broken pipe" errors when piping certain commands during recording (#369) (thanks @Low-power!)
+* Fixed crash during playback of cast files with trailing blank line (#577)
+
+## 2.3.0 (2023-07-05)
+
+* Added official support for Python 3.11
+* Dropped official support for Python 3.6
+* Implemented markers in `rec` and `play -m` commands
+* Added `--loop` option for looped playback in `play` command
+* Added `--stream` and `--out-fmt` option for customizing output of `play` command
+* Improved terminal charset detection (thanks @djds)
+* Extended `cat` command to support multiple files (thanks @Low-power)
+* Improved upload error messages
+* Fixed direct playback from URL
+* Made raw output start with terminal size sequence (`\e[8;H;Wt`)
+* Prevented recording to stdout when it's a TTY
+* Added target file permission checks to avoid ugly errors
+* Removed named pipe re-opening, which was causing hangs in certain scenarios
+* Improved PTY/TTY data reading - it goes in bigger chunks now (256 kb)
+* Fixed deadlock in PTY writes (thanks @Low-power)
+* Improved input forwarding from stdin
+* Ignored OSC responses in recorded stdin stream
+
+## 2.2.0 (2022-05-07)
+
+* Added official support for Python 3.8, 3.9, 3.10
+* Dropped official support for Python 3.5
+* Added `--cols` / `--rows` options for overriding size of pseudo-terminal reported to recorded program
+* Improved behaviour of `--append` when output file doesn't exist
+* Keyboard input is now explicitly read from a TTY device in addition to stdin (when stdin != TTY)
+* Recorded program output is now explicitly written to a TTY device instead of stdout
+* Dash char (`-`) can now be passed as output filename to write asciicast to stdout
+* Diagnostic messages are now printed to stderr (without colors when stderr != TTY)
+* Improved robustness of writing asciicast to named pipes
+* Lots of codebase modernizations (many thanks to Davis @djds Schirmer!)
+* Many other internal refactorings
+
+## 2.1.0 (2021-10-02)
+
+* Ability to pause/resume terminal capture with `C-\` key shortcut
+* Desktop notifications - only for the above pause feature at the moment
+* Removed dependency on tput/ncurses (thanks @arp242 / Martin Tournoij!)
+* ASCIINEMA_REC env var is back (thanks @landonb / Landon Bouma!)
+* Terminal answerbacks (CSI 6 n) in `asciinema cat` are now hidden (thanks @djpohly / Devin J. Pohly!)
+* Codeset detection works on HP-UX now (thanks @michael-o / Michael Osipov!)
+* Attempt at recording to existing file suggests use of `--overwrite` option now
+* Upload for users with very long `$USER` is fixed
+* Added official support for Python 3.8 and 3.9
+* Dropped official support for EOL-ed Python 3.4 and 3.5
+
 ## 2.0.2 (2019-01-12)
 
 * Official support for Python 3.7
